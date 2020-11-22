@@ -1,0 +1,16 @@
+{
+  "name": "stevesbadjokes.com-api",
+  "version": "1.0.0",
+  "description": "An api to keep track of my bad jokes",
+  "main": "index.js",
+  "scripts": {
+    "test": "yarn install && nodemon index.js"
+  },
+  "author": "Stephen Shoemaker",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.6"
+  }
+}

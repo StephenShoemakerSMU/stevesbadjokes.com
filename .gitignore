@@ -1,0 +1,2 @@
+*.lock
+backend/api-server/node_modules
