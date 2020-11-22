@@ -7,10 +7,9 @@ exports.getJokes= ()=>{
     return new Promise((resolve,reject)=>
         {
             axios.get(`${url}jokes`)
-                .then(x=> {console.log(x); 
+                .then(x=> { 
                         resolve(x.data)})
                 .catch(x=>{
-                    console.log(x);
                     reject(x.data)})
         });
 }

@@ -6,16 +6,24 @@ class Home extends Component {
     state = {
         allJokes: 0,
         monthJokes: 0,
-        todayJokes: 0
+        todayJokes: 0,
+        jokeList:[]
     }
     
     componentDidMount(){
         api.getJokes().then(
-            x=>this.setState({
+
+            x=>{
+            
+            this.setState({
                 allJokes:x.all,
                 monthJokes:x.month,
-                todayJokes:x.today
+                todayJokes:x.day,
+                jokeList: x.jokes
             })
+            console.log(this.state.jokeList[0].text)
+            }
+
         ).catch();
     }
 
@@ -42,7 +50,16 @@ class Home extends Component {
                         <h3>
                             {this.state.allJokes}
                         </h3>
+                        <ul>
+                        {this.state.jokeList.map(joke=>
+                            (
+                            <li>
+                                {joke.text}
+                            </li>
+                            )
+                        )}
 
+                        </ul>
                         
 
                     </div>
