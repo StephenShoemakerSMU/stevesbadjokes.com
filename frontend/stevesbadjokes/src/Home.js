@@ -1,6 +1,9 @@
 
 import React, {Component} from 'react';
+import PostJoke from './PostJoke';
+
 const api = require("./api");
+
 
 class Home extends Component {
     state = {
@@ -21,7 +24,6 @@ class Home extends Component {
                 todayJokes:x.day,
                 jokeList: x.jokes
             })
-            console.log(this.state.jokeList[0].text)
             }
 
         ).catch();
@@ -50,8 +52,9 @@ class Home extends Component {
                         <h3>
                             {this.state.allJokes}
                         </h3>
+                        <PostJoke update={()=>this.componentDidMount()}/>
                         <ul>
-                        {this.state.jokeList.map(joke=>
+                        {this.state.jokeList.length>0 && this.state.jokeList.map(joke=>
                             (
                             <li>
                                 {joke.text}

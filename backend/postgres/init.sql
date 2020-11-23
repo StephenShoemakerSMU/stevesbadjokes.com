@@ -1,7 +1,7 @@
 
 
 CREATE TABLE jokes(
-    id VARCHAR(32),
+    id VARCHAR(36),
     text TEXT,
     date TIMESTAMP
 )

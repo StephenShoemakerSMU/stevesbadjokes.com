@@ -1,15 +1,17 @@
-
+const {v4} = require("uuid");
 let express = require('express');
 let app = express();
 const port = 443;
 
 const cors = require('cors');
 
+var bodyParser = require('body-parser')
 const pool = require('./pool').pool;
 
 app.use(cors({
     origin: 'http://localhost:3000'
 }))
+app.use(bodyParser.json());
 
 app.get('/jokes', (req,res)=>{
     console.log("Get Jokes");
@@ -37,6 +39,41 @@ app.get('/jokes', (req,res)=>{
         release()
     })
 
+})
+
+app.post('/joke',(req,res)=>{
+    if(req.body.joke){
+        pool.connect((err,client,release)=>{
+            if(err){
+                res.sendStatus(500);
+            } else {
+                client.query(`INSERT INTO
+                                jokes(
+                                    id,
+                                    text,
+                                    date
+                                )
+                                VALUES(
+                                    $1,
+                                    $2,
+                                    current_timestamp
+                                );`,
+                                [v4(),
+                                req.body.joke],
+                                (err,rows)=>{
+                                    if(err){
+                                        res.sendStatus(500);
+                                    }else {
+                                        res.sendStatus(200);
+                                    }
+                                })
+            }
+
+            release();
+        })
+    } else {
+        res.sendStatus(400);
+    }
 })
 
 app.listen(port, () => {

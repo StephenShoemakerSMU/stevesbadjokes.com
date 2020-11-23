@@ -13,3 +13,14 @@ exports.getJokes= ()=>{
                     reject(x.data)})
         });
 }
+
+exports.postJoke= (joke)=> {
+    return new Promise((resolve,reject)=> {
+        {
+            axios.post(`${url}joke`, {joke})
+                .then(x=>{
+                    resolve(x.data)})
+                .catch(x=>reject(x.data));
+        }
+    })
+}
